@@ -1,0 +1,83 @@
+syntax "python" "\.pyw?$"
+header "^#!.*/(env +)?python[-0-9._]*( |$)"
+magic "Python script"
+comment "#"
+
+linter pyflakes
+
+# ✨ Comments
+color brightmagenta "^#.*|[[:space:]]#.*$"
+
+# 🔢 Numbers (integers, floats, binary, hex, octal)
+icolor brightyellow "\b([0-9]+(\.[0-9]+)?j?)\b"
+icolor brightyellow "\b0[oO]?[0-7]+\b"
+icolor brightyellow "\b0[xX][0-9a-fA-F]+\b"
+icolor brightyellow "\b0[bB][01]+\b"
+
+# 🟩 Python Keywords
+color green "\<(and|as|assert|async|await|break|class|continue|def|del|elif|else|except|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|raise|return|try|while|with|yield)\>"
+
+# 🧡 Constants & Common Vars
+color orange "\<(None|self|True|False|Ellipsis|NotImplemented)\>"
+
+# 🔧 Built-in Functions
+color blue "\<(abs|all|any|ascii|bin|bool|bytearray|bytes|callable|chr|classmethod|compile|complex|delattr|dict|dir|divmod|enumerate|eval|exec|filter|float|format|getattr|globals|hasattr|hash|help|hex|id|input|int|isinstance|issubclass|iter|len|list|locals|map|max|min|next|object|oct|open|ord|pow|print|property|range|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|vars|zip)\>"
+
+# 🟨 Function & Class Names
+color yellow "\<(def|class)\s+[a-zA-Z_][a-zA-Z_0-9]*"
+
+# 💠 Decorators
+color blue "^@[a-zA-Z_][a-zA-Z_0-9.]*"
+
+# 💥 Exception Types
+color brightcyan "\<(BaseException|Exception|ArithmeticError|AssertionError|AttributeError|EOFError|FloatingPointError|GeneratorExit|ImportError|IndexError|KeyError|KeyboardInterrupt|MemoryError|NameError|NotImplementedError|OSError|OverflowError|RecursionError|ReferenceError|RuntimeError|StopIteration|SyntaxError|SystemError|SystemExit|TypeError|UnboundLocalError|UnicodeError|ValueError|ZeroDivisionError)\>"
+
+# 💫 Special (Magic) Methods
+color cyan "\<__\w+__\>"
+
+# 🔣 Operators & Punctuation
+color blue "[=<>+*/%|&^~:,.;@-]"
+
+# 📦 Imports
+color yellow "^\s*(from|import)\s+[a-zA-Z0-9_.]+"
+color orange "\<import\>"
+
+# 📝 TODO & Notes
+color yellow "(TODO|FIXME|XXX|NOTE)"
+
+# ❗ Trailing Spaces (avoid them!)
+color ,brightred "[[:space:]]+$"
+
+# 🧵 Strings
+
+# Regular quoted strings
+color green "\"([^\\\"]|\\.)*\""
+color green "'([^\\']|\\.)*'"
+
+# Triple quoted multi-line
+color green "\"\"\"(.|\n)*?\"\"\""
+color green "'''(.|\n)*?'''"
+
+# f-strings (highlight full string)
+color green "f\"([^\\\"]|\\.)*\""
+color green "f'([^\\']|\\.)*'"
+
+# f-string interpolations: {var}
+color brightblue "\{[^}]+\}"
+
+# Raw strings
+color brightmagenta "r(['\"])[^'\"]*\1"
+
+# 🌐 URLs & Links
+color yellow "\<(https?|ftp)://[a-zA-Z0-9._~:/?#@!$&'()*+,;=%-]*\>"
+
+# 🧲 Bracket Matching & Settings
+set matchbrackets "(<[{)>]}"
+set brackets "\"')>]}"
+set tabsize 4
+set tabstospaces
+set autoindent
+set smarthome
+set linenumbers
+set constantshow
+set backup
